@@ -1,5 +1,9 @@
 /.settings/
 /.classpath
 /.project
+<<<<<<< HEAD
 /target/
 /.tomcatplugin
+=======
+>>>>>>> branch 'master' of https://github.com/lerdipai/lerdipai-client.git
+/bin/
