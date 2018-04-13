@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <Property name="LOG4J2.ROOT.HOME">D:/logs/lerdipai-client</Property>
+        <Property name="LOG4J2.MACHINE.ID">01</Property>
+    </Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM HH:mm:ss.SSS} %-5level %logger{36} %L - %msg%n" />
+		</Console>
+		
+		<RollingRandomAccessFile name="INFO_ROLLING_FILE" fileName="${LOG4J2.ROOT.HOME}/info/info${LOG4J2.MACHINE.ID}.log" 
+            filePattern="${LOG4J2.ROOT.HOME}/info/info${LOG4J2.MACHINE.ID}-%d{yyyyMMdd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM HH:mm:ss.SSS} %-5level %logger{36} %L - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+        
+        <RollingRandomAccessFile name="ERROR_ROLLING_FILE" fileName="${LOG4J2.ROOT.HOME}/error/error${LOG4J2.MACHINE.ID}.log" 
+            filePattern="${LOG4J2.ROOT.HOME}/error/error${LOG4J2.MACHINE.ID}-%d{yyyyMMdd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM HH:mm:ss.SSS} %-5level %logger{36} %L - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+	</Appenders>
+
+	<Loggers>
+		<Root level="INFO">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="INFO_ROLLING_FILE" />
+            <AppenderRef ref="ERROR_ROLLING_FILE" level="ERROR" additivity="false" />
+		</Root>
+	</Loggers>
+</Configuration>
