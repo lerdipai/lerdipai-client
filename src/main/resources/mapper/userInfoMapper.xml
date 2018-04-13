@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lerdipai.client.dao.UserInfoDAO">
+	<parameterMap type="com.lerdipai.client.pojo.UserInfo" id="ParameterMap"></parameterMap>
+	<resultMap type="com.lerdipai.client.pojo.UserInfo" id="BaseResultMap">
+		<result property="userId" column="user_id" />
+		<result property="mobile" column="mobile" />
+	</resultMap>
+	
+	<select id="query" resultMap="BaseResultMap" parameterType="com.icafebutler.framework.mybatis.query.ConditionQuery">
+        select
+        *
+        from user_info t1
+        <include refid="conditionQuery.core" />
+        <if test="paramMap.rows > 0" >
+        LIMIT #{paramMap.firstRow0}, #{paramMap.rows}
+        </if>
+    </select>
+
+    <select id="queryCnt" parameterType="com.icafebutler.framework.mybatis.query.ConditionQuery" resultType="int">
+        select
+        count(*)
+        from user_info t1
+        <include refid="conditionQuery.core" />
+    </select>
+
+	<select id="get" resultMap="BaseResultMap" parameterType="int">
+		select
+		*
+		from user_info
+		where user_id = #{userId}
+	</select>
+	<insert id="save" parameterMap="ParameterMap" useGeneratedKeys="true" keyProperty="userId">
+		insert into user_info (
+			mobile
+		) values (
+			#{mobile}
+		)
+	</insert>
+</mapper>
